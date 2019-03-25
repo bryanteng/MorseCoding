@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, TextInput, StyleSheet, Platform, Button} from 'react-native';
-import Torch from 'react-native-torch';
+import {Text, View, TextInput, StyleSheet, Button} from 'react-native';
 
 export default class Receiver extends Component {
 
@@ -15,34 +14,24 @@ export default class Receiver extends Component {
     }
 
     handleButtonClick = () =>{
+      window.clearInterval()
       let string = this.state.translated
-      let dotDashHash ={
-        ".": 1,
-        "-": 3,
-        " ": 3,
-        "/": 1
-      }
+      let dotDashHash ={".": 1,"-": 3," ": 3,"/": 1}
       let ret=[]
-      let offset= 0
-          for(char in string){
-            if(string[char] == "." || string[char] == "-"){
-              for(let i = 0; i < dotDashHash[string[char]]; i++){
-                ret.push("blue")
-              }
-            }else{
-              for(let i = 0; i < dotDashHash[string[char]]; i++){
-                ret.push("white")
-              }
-            }
-            ret.push("white")
+        for(char in string){
+          if(string[char] == "." || string[char] == "-"){
+            for(let i = 0; i < dotDashHash[string[char]]; i++){ret.push("#cef0ff")}
+          }else{
+            for(let i = 0; i < dotDashHash[string[char]]; i++){ret.push('#F5FCFF')}
           }
-      ret.push("green")
+          ret.push('#F5FCFF')
+        }
+      ret.push("#7cefb5")
+
       counter=0
       setInterval(()=> {
         this.setState({backgroundColor: ret[counter]})
-        counter++}
-        ,1000)
-        console.log(ret)
+        counter++},500)
     }
     
     
