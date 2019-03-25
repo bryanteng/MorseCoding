@@ -17,29 +17,32 @@ export default class Receiver extends Component {
     handleButtonClick = () =>{
       let string = this.state.translated
       let dotDashHash ={
-        ".": 1000,
-        "-": 3000,
-        " ": 3000,
-        "/": 1000
+        ".": 1,
+        "-": 3,
+        " ": 3,
+        "/": 1
       }
+      let ret=[]
       let offset= 0
-      for(char in string){
-        setTimeout(()=>this.setState({backgroundColor: '#3c495e'}), 1000 + offset)
-        if(string[char] == "." || string[char] == "-"){
-          console.log("blue", char)
-          setTimeout(()=>this.setState({backgroundColor: "#a3c6ff" }), +dotDashHash[string[char]] + offset)
-          // char == 0 && string.length > 1 ? null : setTimeout(()=>this.setState({backgroundColor: '#3c495e'}), 1000 + offset)
-        }else{
-          console.log("white", char)
-          setTimeout(()=>this.setState({backgroundColor: '#F5FCFF'}), +dotDashHash[string[char]] + offset)
-          // setTimeout(()=>this.setState({backgroundColor: '#3c495e'}), 1000 + offset)
-        }
-        offset += +dotDashHash[string[char]]+1000
-      }
-      setTimeout(()=>this.setState({backgroundColor: 'green'}), 1000 + offset)
-
-      setTimeout(()=>this.setState({backgroundColor: '#F5FCFF'}), 2000 + offset)
-
+          for(char in string){
+            if(string[char] == "." || string[char] == "-"){
+              for(let i = 0; i < dotDashHash[string[char]]; i++){
+                ret.push("blue")
+              }
+            }else{
+              for(let i = 0; i < dotDashHash[string[char]]; i++){
+                ret.push("white")
+              }
+            }
+            ret.push("white")
+          }
+      ret.push("green")
+      counter=0
+      setInterval(()=> {
+        this.setState({backgroundColor: ret[counter]})
+        counter++}
+        ,1000)
+        console.log(ret)
     }
     
     
