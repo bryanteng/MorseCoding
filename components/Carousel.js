@@ -25,7 +25,7 @@ export default class Carousel extends Component {
     }
     render() {
         return (
-            <View >
+            <View style={{flex: 1, justifyContent: 'space-evenly'}}>
                 <View style={{
                     flexDirection: 'row',
                     justifyContent: 'space-evenly',

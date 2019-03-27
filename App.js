@@ -7,12 +7,13 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
 import Receiver from "./components/Receiver"
 import Carousel from "./components/Carousel"
 
 type Props = {};
 export default class App extends Component<Props> {
+
   state={
     show: false
   }
@@ -20,15 +21,15 @@ export default class App extends Component<Props> {
   handleShow=()=>{
     this.setState({show: !this.state.show})
   }
+
   render() {
     return (
       <View style={styles.container}>
         <Receiver />
-        {this.state.show ? 
-          <View style={{flex: 1, justifyContent: 'space-evenly'}}><Button title="hide carousel" onPress={this.handleShow}></Button><Carousel /></View> 
-        : <Button title="show carousel" onPress={this.handleShow}></Button>}
+        <TouchableOpacity onPress={this.handleShow}><Text style={styles.welcome}>{this.state.show ? "hide carousel" : "show carousel"}</Text></TouchableOpacity>
+          {this.state.show ? <Carousel/>: null} 
       </View>
-    );
+    )
   }
 }
 

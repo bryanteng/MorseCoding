@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, TextInput, StyleSheet, Button} from 'react-native';
+import {Text, View, TextInput, StyleSheet, Button, TouchableOpacity} from 'react-native';
 
 export default class Receiver extends Component {
 
@@ -20,7 +20,7 @@ export default class Receiver extends Component {
       let ret=[]
         for(char in string){
           if(string[char] == "." || string[char] == "-"){
-            for(let i = 0; i < dotDashHash[string[char]]; i++){ret.push("#cef0ff")}
+            for(let i = 0; i < dotDashHash[string[char]]; i++){ret.push("#5f8bd3")}
           }else{
             for(let i = 0; i < dotDashHash[string[char]]; i++){ret.push('#F5FCFF')}
           }
@@ -31,7 +31,7 @@ export default class Receiver extends Component {
       counter=0
       setInterval(()=> {
         this.setState({backgroundColor: ret[counter]})
-        counter++},500)
+        counter++},300)
     }
     
     
@@ -42,7 +42,7 @@ export default class Receiver extends Component {
                 <Text style={styles.text}>Enter text to be translated here: </Text>
                 <TextInput style={styles.textInput} onChangeText={this.handleOnChange}> </TextInput>
                 <Text style={styles.translated}>{this.state.translated}</Text>
-                <Button title="X" onPress={this.handleButtonClick}>  </Button>
+                <Button title="Play" onPress={this.handleButtonClick}>  </Button>
             </View>
         );
     }
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
       borderRadius: 1,
       borderWidth: 0.5,
       borderColor: '#d6d7da',
+      textAlign: 'center'
     },
     receiver: {
         flex: 1,
@@ -74,7 +75,6 @@ const styles = StyleSheet.create({
         flex:3,
       textAlign: 'center',
       color: '#333333',
-      marginBottom: 5,
       fontSize: 20,
       alignItems: "stretch"
     }
